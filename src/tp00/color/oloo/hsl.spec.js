@@ -2,6 +2,7 @@
 
 const HSL = require('./hsl')
 const RGBA = require('./rgba')
+const glMatrix = require('gl-matrix')
 
 describe('HSL Color - OLOO', function () {
   it('should be prototype of RGBA', function () {
@@ -33,7 +34,7 @@ describe('HSL Color - OLOO', function () {
   describe('#vec4()', function () {
     it('should return [0,1,0,1] for (120, 1.0, 0.5)', function () {
       var color = Object.create(HSL)
-      var expected = []
+      var expected = glMatrix.vec4.create()
 
       color.init(120, 1.0, 0.5)
 
@@ -45,7 +46,7 @@ describe('HSL Color - OLOO', function () {
     })
     it('should return [1,1,0,1] for (60, 1.0, 0.5)', function () {
       var color = Object.create(HSL)
-      var expected = []
+      var expected = glMatrix.vec4.create()
 
       color.init(60, 1.0, 0.5)
 
@@ -58,7 +59,7 @@ describe('HSL Color - OLOO', function () {
 
     it('should return [0,1,1,1] for (180, 1.0, 0.5)', function () {
       var color = Object.create(HSL)
-      var expected = []
+      var expected = glMatrix.vec4.create()
 
       color.init(180, 1.0, 0.5)
 

@@ -2,6 +2,7 @@
 
 const Style = require('./style')
 const RGBA = require('./rgba')
+const glMatrix = require('gl-matrix')
 
 describe('Style Color - OLOO', function () {
   it('should be prototype of RGBA', function () {
@@ -33,7 +34,7 @@ describe('Style Color - OLOO', function () {
   describe('#vec4()', function () {
     it('should return [1,1,1,1] for #ffffff', function () {
       var color = Object.create(Style)
-      var expected = []
+      var expected = glMatrix.vec4.create()
 
       color.init('#ffffff')
 
@@ -45,7 +46,7 @@ describe('Style Color - OLOO', function () {
     })
     it('should return [0,0,0,1] for #000000', function () {
       var color = Object.create(Style)
-      var expected = []
+      var expected = glMatrix.vec4.create()
 
       color.init('#000000')
 
@@ -57,7 +58,7 @@ describe('Style Color - OLOO', function () {
     })
     it('should return [1,0,0,1] for #ff0000', function () {
       var color = Object.create(Style)
-      var expected = []
+      var expected = glMatrix.vec4.create()
 
       color.init('#ff0000')
 
@@ -69,7 +70,7 @@ describe('Style Color - OLOO', function () {
     })
     it('should return [0,1,0,1] for #00ff00', function () {
       var color = Object.create(Style)
-      var expected = []
+      var expected = glMatrix.vec4.create()
 
       color.init('#00ff00')
 
@@ -81,7 +82,7 @@ describe('Style Color - OLOO', function () {
     })
     it('should return [0,0,1,1] for #0000ff', function () {
       var color = Object.create(Style)
-      var expected = []
+      var expected = glMatrix.vec4.create()
 
       color.init('#0000ff')
 
@@ -94,7 +95,7 @@ describe('Style Color - OLOO', function () {
 
     it('should return [0,0,0,1] for #000', function () {
       var color = Object.create(Style)
-      var expected = []
+      var expected = glMatrix.vec4.create()
 
       color.init('#000')
 
@@ -107,7 +108,7 @@ describe('Style Color - OLOO', function () {
 
     it('should return [0,0,1,1] for #00f', function () {
       var color = Object.create(Style)
-      var expected = []
+      var expected = glMatrix.vec4.create()
 
       color.init('#00f')
 
@@ -120,7 +121,7 @@ describe('Style Color - OLOO', function () {
 
     it('should return [0,1,1,1] for #0ff', function () {
       var color = Object.create(Style)
-      var expected = []
+      var expected = glMatrix.vec4.create()
 
       color.init('#0ff')
 
@@ -133,7 +134,7 @@ describe('Style Color - OLOO', function () {
 
     it('should return [1,1,1,1] for #fff', function () {
       var color = Object.create(Style)
-      var expected = []
+      var expected = glMatrix.vec4.create()
 
       color.init('#fff')
 

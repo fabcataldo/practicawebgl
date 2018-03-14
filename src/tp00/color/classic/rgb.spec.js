@@ -2,6 +2,7 @@
 
 const RGB = require('./rgb')
 const RGBA = require('./rgba')
+const glMatrix = require('gl-matrix')
 
 describe('RGB Color - Classic', function () {
   it('should be an instance of RGBA', function () {
@@ -30,7 +31,7 @@ describe('RGB Color - Classic', function () {
   describe('#vec4()', function () {
     it('should return [1,1,1,1] as default', function () {
       var color = new RGB()
-      var expected = []
+      var expected = glMatrix.vec4.create()
 
       expected[0] = 1
       expected[1] = 1
@@ -41,7 +42,7 @@ describe('RGB Color - Classic', function () {
 
     it('should return [1,0.5,0.25,1] for (1, 0.5, 0.25)', function () {
       var color = new RGB(1, 0.5, 0.25)
-      var expected = []
+      var expected = glMatrix.vec4.create()
 
       expected[0] = 1
       expected[1] = 0.5

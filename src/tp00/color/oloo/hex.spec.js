@@ -2,6 +2,7 @@
 
 const Hex = require('./hex')
 const RGBA = require('./rgba')
+const glMatrix = require('gl-matrix')
 
 describe('Hex Color - OLOO', function () {
   it('should be prototype of RGBA', function () {
@@ -33,7 +34,7 @@ describe('Hex Color - OLOO', function () {
   describe('#vec4()', function () {
     it('should return [1,1,1,1] for 0xffffff', function () {
       var color = Object.create(Hex)
-      var expected = []
+      var expected = glMatrix.vec4.create()
 
       color.init(0xffffff)
 
@@ -45,7 +46,7 @@ describe('Hex Color - OLOO', function () {
     })
     it('should return [0,0,0,1] for 0x000000', function () {
       var color = Object.create(Hex)
-      var expected = []
+      var expected = glMatrix.vec4.create()
 
       color.init(0x000000)
 
@@ -57,7 +58,7 @@ describe('Hex Color - OLOO', function () {
     })
     it('should return [1,0,0,1] for 0xff0000', function () {
       var color = Object.create(Hex)
-      var expected = []
+      var expected = glMatrix.vec4.create()
 
       color.init(0xff0000)
 
@@ -69,7 +70,7 @@ describe('Hex Color - OLOO', function () {
     })
     it('should return [0,1,0,1] for 0x00ff00', function () {
       var color = Object.create(Hex)
-      var expected = []
+      var expected = glMatrix.vec4.create()
 
       color.init(0x00ff00)
 
@@ -81,7 +82,7 @@ describe('Hex Color - OLOO', function () {
     })
     it('should return [0,0,1,1] for 0x0000ff', function () {
       var color = Object.create(Hex)
-      var expected = []
+      var expected = glMatrix.vec4.create()
 
       color.init(0x0000ff)
 

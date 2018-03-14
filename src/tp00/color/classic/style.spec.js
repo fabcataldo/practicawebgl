@@ -2,6 +2,7 @@
 
 const Style = require('./style')
 const RGBA = require('./rgba')
+const glMatrix = require('gl-matrix')
 
 describe('Style Color - Classic', function () {
   it('should be an instance of RGBA', function () {
@@ -30,7 +31,7 @@ describe('Style Color - Classic', function () {
   describe('#vec4()', function () {
     it('should return [1,1,1,1] for #ffffff', function () {
       var color = new Style('#ffffff')
-      var expected = []
+      var expected = glMatrix.vec4.create()
 
       expected[0] = 1
       expected[1] = 1
@@ -40,7 +41,7 @@ describe('Style Color - Classic', function () {
     })
     it('should return [0,0,0,1] for #000000', function () {
       var color = new Style('#000000')
-      var expected = []
+      var expected = glMatrix.vec4.create()
 
       expected[0] = 0
       expected[1] = 0
@@ -50,7 +51,7 @@ describe('Style Color - Classic', function () {
     })
     it('should return [1,0,0,1] for #ff0000', function () {
       var color = new Style('#ff0000')
-      var expected = []
+      var expected = glMatrix.vec4.create()
 
       expected[0] = 1
       expected[1] = 0
@@ -60,7 +61,7 @@ describe('Style Color - Classic', function () {
     })
     it('should return [0,1,0,1] for #00ff00', function () {
       var color = new Style('#00ff00')
-      var expected = []
+      var expected = glMatrix.vec4.create()
 
       expected[0] = 0
       expected[1] = 1
@@ -70,7 +71,7 @@ describe('Style Color - Classic', function () {
     })
     it('should return [0,0,1,1] for #0000ff', function () {
       var color = new Style('#0000ff')
-      var expected = []
+      var expected = glMatrix.vec4.create()
 
       expected[0] = 0
       expected[1] = 0
@@ -81,7 +82,7 @@ describe('Style Color - Classic', function () {
 
     it('should return [0,0,0,1] for #000', function () {
       var color = new Style('#000')
-      var expected = []
+      var expected = glMatrix.vec4.create()
 
       expected[0] = 0
       expected[1] = 0
@@ -92,7 +93,7 @@ describe('Style Color - Classic', function () {
 
     it('should return [0,0,1,1] for #00f', function () {
       var color = new Style('#00f')
-      var expected = []
+      var expected = glMatrix.vec4.create()
 
       expected[0] = 0
       expected[1] = 0
@@ -103,7 +104,7 @@ describe('Style Color - Classic', function () {
 
     it('should return [0,1,1,1] for #0ff', function () {
       var color = new Style('#0ff')
-      var expected = []
+      var expected = glMatrix.vec4.create()
 
       expected[0] = 0
       expected[1] = 1
@@ -114,7 +115,7 @@ describe('Style Color - Classic', function () {
 
     it('should return [1,1,1,1] for #fff', function () {
       var color = new Style('#fff')
-      var expected = []
+      var expected = glMatrix.vec4.create()
 
       expected[0] = 1
       expected[1] = 1
