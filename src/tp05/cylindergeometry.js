@@ -32,11 +32,11 @@ cylindergeometry.CylinderGeometry = function (caras) {
   this.normals.push(0, -1, 0)
   this.normals.push(0, 1, 0)
 
-  /*
+
   this.normals = this.normals.concat(this.vertices)
   this.vertices = this.vertices.concat(this.vertices)
   this.st = this.st.concat(this.st)
-  */
+
   for (i = 1; i <= this.caras * 2; i++) {
     this.indices.push(i - 1)
     this.indices.push(i)
