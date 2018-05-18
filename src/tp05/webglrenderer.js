@@ -84,8 +84,6 @@ WebGLRenderer.prototype.readPicking = function (scene) {
   // transformo el color del pixel leído, que me devuelve readPixels(), en valores de 0 a 1
   var colorPicked = [read[0] / 255, read[1] / 255, read[2] / 255]
 
-  console.log(colorPicked)
-
   for (var i = 5; i < scene.meshes.length; i++) {
     // si el color del pixel que hice click, tiene el mismo color que el del objeto que clickié
     if (this.compareArraysColor(scene.meshes[i].colorPicking, colorPicked)) {
