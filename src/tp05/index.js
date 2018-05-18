@@ -7,10 +7,9 @@ var PERSPECTIVECAMERA = require('./perspectivecamera')
 const AMBIENTLIGHT = require('./ambientlight')
 const POINTLIGHT = require('./pointlight')
 const DIRECTIONALLIGHT = require('./directionallight')
-// const MATERIAL = require('./material')
 
 var scene = new SCENE()
-// el color del canvas debe ser igual que el de scene.clearColor
+
 scene.clearColor = [0.2, 0.2, 0.2, 1.0]
 var i
 
@@ -299,6 +298,22 @@ scene.meshes[6].material.map = require('./firefox-256x256.png')
 // scene.meshes[6].material.map = require('./earthmap-1024x512.jpg')
 scene.meshes[7].material.map = require('./firefox-256x256.png')
 
+scene.meshes[5].figurename = 'Cubo'
+scene.meshes[6].figurename = 'Esfera'
+scene.meshes[7].figurename = 'Cilindro'
+
+// material turquesa, como el color del cubo, con brillo de 0.25*128
+scene.meshes[5].material.setColorAmbient([0.1, 0.18725, 0.1745, 1.0])
+scene.meshes[5].material.setShininess(0.1)
+
+// material rojo plástico, con brillo de 0.25*128
+scene.meshes[6].material.setColorAmbient([0.0, 0.0, 0.0, 1.0])
+scene.meshes[6].material.setShininess(0.25)
+
+// material green rubber, con brillo de 0.078125*128
+scene.meshes[7].material.setColorAmbient([0.0, 0.05, 0.0, 1.0])
+scene.meshes[7].material.setShininess(0.078125)
+
 function tick () {
   // Lookup the size the browser is displaying the canvas.
   var displayWidth = canvas.clientWidth
@@ -343,12 +358,8 @@ function tick () {
   cuboMesh.rotarMesh()
   cuboMesh.escalarMesh()
 
-  // material turquesa, como el color del cubo, con brillo de 0.25*128
-  scene.meshes[5].material.setColorAmbient([0.1, 0.18725, 0.1745, 1.0])
   scene.meshes[5].material.setColorDiffuse([statecubom.cdr, statecubom.cdg, statecubom.cdb, statecubom.cda])
   scene.meshes[5].material.setColorSpecular([statecubom.csr, statecubom.csg, statecubom.csb, statecubom.csa])
-  scene.meshes[5].material.setShininess(0.1)
-  scene.meshes[5].figurename = 'Cubo'
 
   esferaMesh.trasladar = coordenadasTransformsEsfera[0]
   esferaMesh.rotar = coordenadasTransformsEsfera[1]
@@ -358,13 +369,8 @@ function tick () {
   esferaMesh.rotarMesh()
   esferaMesh.escalarMesh()
 
-  // material rojo plástico, con brillo de 0.25*128
-  // scene.meshes[6].material.setColor()
-  scene.meshes[6].material.setColorAmbient([0.0, 0.0, 0.0, 1.0])
   scene.meshes[6].material.setColorDiffuse([stateesferam.edr, stateesferam.edg, stateesferam.edb, stateesferam.eda])
   scene.meshes[6].material.setColorSpecular([stateesferam.esr, stateesferam.esg, stateesferam.esb, stateesferam.esa])
-  scene.meshes[6].material.setShininess(0.25)
-  scene.meshes[6].figurename = 'Esfera'
 
   cilindroMesh.trasladar = coordenadasTransformsCilindro[0]
   cilindroMesh.rotar = coordenadasTransformsCilindro[1]
@@ -373,13 +379,9 @@ function tick () {
   cilindroMesh.trasladarMesh()
   cilindroMesh.rotarMesh()
   cilindroMesh.escalarMesh()
-  // material green rubber, con brillo de 0.078125*128
-  // scene.meshes[7].material.setColor([statecilindrom.cr, statecilindrom.cg, statecilindrom.cb, statecilindrom.ca])
-  scene.meshes[7].material.setColorAmbient([0.0, 0.05, 0.0, 1.0])
+
   scene.meshes[7].material.setColorDiffuse([statecilindrom.cdr, statecilindrom.cdg, statecilindrom.cdb, statecilindrom.cda])
   scene.meshes[7].material.setColorSpecular([statecilindrom.csr, statecilindrom.csg, statecilindrom.csb, statecilindrom.csa])
-  scene.meshes[7].material.setShininess(0.078125)
-  scene.meshes[7].figurename = 'Cilindro'
 
   webglrenderer.render(scene, perspectivecamera, cameraeye)
 

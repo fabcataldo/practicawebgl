@@ -8,30 +8,35 @@ cylindergeometry.CylinderGeometry = function (caras) {
   this.vertices = []
   this.indices = []
   this.normals = []
+  var radius = 1
   var anguloAcumulador = 0
   this.st = []
 
   // genero los vertices de todas las caras del cilindro, girando con el angulo_acumulador
-  for (var i = 0; i < this.caras; i++) {
-    anguloAcumulador += 2 * Math.PI / this.caras
-    this.vertices.push(Math.cos(anguloAcumulador) * 1, Math.sin(anguloAcumulador) * 1, 0)
-    this.vertices.push(Math.cos(anguloAcumulador) * 1, Math.sin(anguloAcumulador) * 1, 1.5)
-    this.normals.push(0, -1, 0)
-    this.normals.push(0, 1, 0)
+  for (var i = 0; i < caras; i++) {
+    anguloAcumulador += 2 * Math.PI / caras
+    this.vertices.push(Math.cos(anguloAcumulador) * 1, Math.sin(anguloAcumulador) * radius, 0)
+    this.vertices.push(Math.cos(anguloAcumulador) * 1, Math.sin(anguloAcumulador) * radius, 1.5)
+
     this.st.push(1 - i / this.caras, 0)
     this.st.push(1 - i / this.caras, 1)
+    this.normals.push(0, -1, 0)
+    this.normals.push(0, 1, 0)
   }
   this.vertices.push(0, 0, 0)
   this.vertices.push(0, 0, 1.5)
 
-  this.normals.push(0, -1, 0)
-  this.normals.push(0, 1, 0)
-
   this.st.push(0, 0)
   this.st.push(0, 1)
 
+  this.normals.push(0, -1, 0)
+  this.normals.push(0, 1, 0)
+
+  /*
   this.normals = this.normals.concat(this.vertices)
+  this.vertices = this.vertices.concat(this.vertices)
   this.st = this.st.concat(this.st)
+  */
   for (i = 1; i <= this.caras * 2; i++) {
     this.indices.push(i - 1)
     this.indices.push(i)

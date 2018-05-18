@@ -26,6 +26,7 @@ function WebGLRenderer (canvas) {
       pickingCoordenadas = {x: event.offsetX, y: canvasheight - event.offsetY}
     }
   })
+
   this.program = this.initiateProgram(vsSource, fsSource)
   this.programpicking = this.initiateProgram(vsSource2, fsSource2)
   this.framebuffer = this.initiateFrameBufferPicking(canvas)
@@ -74,21 +75,27 @@ WebGLRenderer.prototype.readPicking = function (scene) {
   var read = new Uint8Array(1 * 1 * 4)
   this.gl.bindFramebuffer(this.gl.FRAMEBUFFER, this.framebuffer)
 
+  // leo el pixel y obtengo el color
   this.gl.readPixels(pickingCoordenadas.x, pickingCoordenadas.y, 1, 1, this.gl.RGBA,
     this.gl.UNSIGNED_BYTE, read)
+  this.gl.bindFramebuffer(this.gl.FRAMEBUFFER, null)
   // console.log(read)
+
+  // transformo el color del pixel leído, que me devuelve readPixels(), en valores de 0 a 1
   var colorPicked = [read[0] / 255, read[1] / 255, read[2] / 255]
 
-  console.log(colorPicked)
+  // console.log(colorPicked)
 
   for (var i = 5; i < scene.meshes.length; i++) {
-    // si el color del pixel que hice click, tiene el musmo color que el del objeto que clickié
+    // console.log(scene.meshes[i].colorPicking)
+
+    // si el color del pixel que hice click, tiene el mismo color que el del objeto que clickié
     if (this.compareArraysColor(scene.meshes[i].colorPicking, colorPicked)) {
-      // console.log('asdads')
       // muestro cuál objeto clickié
       console.log(scene.meshes[i].figurename)
     }
   }
+  // pongo pickingCoordenadas=null para luego poder obtener el siguiente click
   pickingCoordenadas = null
 }
 
@@ -174,6 +181,7 @@ WebGLRenderer.prototype.initiateProgram = function (vssrc, fssrc) {
   return program
 }
 
+// esta función obtiene el framebuffer necesario para poder leer el pixel del objeto que yo haga click
 WebGLRenderer.prototype.initiateFrameBufferPicking = function (canvas) {
   // creo una textura para guardar los colores de los objetos
   var texture = this.gl.createTexture()
@@ -223,7 +231,6 @@ WebGLRenderer.prototype.render = function (scene, camera, cameraEye) {
   if (pickingCoordenadas) {
     this.readPicking(scene)
   }
-
   this.renderOnScreen(scene, camera, cameraEye)
 }
 
