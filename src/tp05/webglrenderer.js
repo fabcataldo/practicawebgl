@@ -72,23 +72,21 @@ WebGLRenderer.prototype.initiateVariables = function () {
 }
 
 WebGLRenderer.prototype.readPicking = function (scene) {
+  // guardo un arreglo que va a tener el color en rgba del pixel
   var read = new Uint8Array(1 * 1 * 4)
-  this.gl.bindFramebuffer(this.gl.FRAMEBUFFER, this.framebuffer)
 
   // leo el pixel y obtengo el color
   this.gl.readPixels(pickingCoordenadas.x, pickingCoordenadas.y, 1, 1, this.gl.RGBA,
     this.gl.UNSIGNED_BYTE, read)
+  // desbindeo el framebuffer porque ya lo usé para leer el pixel
   this.gl.bindFramebuffer(this.gl.FRAMEBUFFER, null)
-  // console.log(read)
 
   // transformo el color del pixel leído, que me devuelve readPixels(), en valores de 0 a 1
   var colorPicked = [read[0] / 255, read[1] / 255, read[2] / 255]
 
-  // console.log(colorPicked)
+  console.log(colorPicked)
 
   for (var i = 5; i < scene.meshes.length; i++) {
-    // console.log(scene.meshes[i].colorPicking)
-
     // si el color del pixel que hice click, tiene el mismo color que el del objeto que clickié
     if (this.compareArraysColor(scene.meshes[i].colorPicking, colorPicked)) {
       // muestro cuál objeto clickié
@@ -213,7 +211,6 @@ WebGLRenderer.prototype.initiateFrameBufferPicking = function (canvas) {
   // limpio lo que creé para evitar interferencias entre buffers
   this.gl.bindTexture(this.gl.TEXTURE_2D, null)
   this.gl.bindRenderbuffer(this.gl.RENDERBUFFER, null)
-  this.gl.bindFramebuffer(this.gl.FRAMEBUFFER, null)
 
   return framebuffer
 }
@@ -309,6 +306,8 @@ WebGLRenderer.prototype.renderOnScreen = function (scene, camera, cameraEye) {
 
     // los primeros meshes son los ejes y la grilla, los otros son las figuras
     if (i < 5) { // ejes y grilla
+      scene.meshes[i].setUsandoText(false)
+      gl.uniform1i(this.uUsandoText, scene.meshes[i].getUsandoText())
       gl.uniform4fv(this.uColor, new Float32Array(scene.meshes[i].material.getColor()))
       gl.drawElements(gl.LINES, scene.meshes[i].indexArrayObject.length, gl.UNSIGNED_SHORT, 0)
     } else { // figuras
@@ -320,8 +319,6 @@ WebGLRenderer.prototype.renderOnScreen = function (scene, camera, cameraEye) {
       gl.uniform1f(this.uShininess, scene.meshes[i].material.getShininess())
 
       gl.drawElements(gl.TRIANGLES, scene.meshes[i].indexArrayObject.length, gl.UNSIGNED_SHORT, 0)
-      scene.meshes[i].setUsandoText(false)
-      gl.uniform1i(this.uUsandoText, scene.meshes[i].getUsandoText())
     }
   }
   // limpio todo
