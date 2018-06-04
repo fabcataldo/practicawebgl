@@ -6,6 +6,70 @@
 
 var DGL = DGL || {};
 
+DGL.v3dot = function(v1, v2) {
+
+	return v1[0] * v2[0] + v1[1] * v2[1] + v1[2] * v2[2];
+};
+
+DGL.v3cross = function(v1, v2) {
+
+	return [
+		v1[1] * v2[2] - v1[2] * v2[1],
+		v1[2] * v2[0] - v1[0] * v2[2],
+		v1[0] * v2[1] - v1[1] * v2[0]
+	];
+};
+
+DGL.v3add = function(v1, v2) {
+
+	return [v1[0] + v2[0], v1[1] + v2[1], v1[2] + v2[2]];
+};
+
+DGL.v3neg = function(v) {
+
+	return [-v[0], -v[1], -v[2]];
+};
+
+DGL.v3zero = function() {
+
+	return [0.0, 0.0, 0.0];
+};
+
+DGL.v3x = function() {
+
+	return [1.0, 0.0, 0.0];
+};
+
+DGL.v3y = function() {
+
+	return [0.0, 1.0, 0.0];
+};
+
+DGL.v3z = function() {
+
+	return [0.0, 0.0, 1.0];
+};
+
+DGL.v3eq = function(v1, v2) {
+
+	return (v1[0] == v2[0]) && (v1[1] == v2[1]) && (v1[2] == v2[2]);
+};
+
+DGL.v3div = function(v, s) {
+
+	return [v[0] / s, v[1] / s, v[2] / s];
+};
+
+DGL.v3mult = function(v, s) {
+
+	return [v[0] * s, v[1] * s, v[2] * s];
+};
+
+DGL.v3norm = function(v) {
+
+	return Math.sqrt(DGL.v3dot(v, v));
+};
+
 DGL.v3normalize = function(v) {
 
 	var norm = DGL.v3norm(v);
@@ -145,7 +209,7 @@ DGL.parseObj = function(src, smooth) {
                         normals[(i * 3 + 2) * 3 + 2] = n2[2];
                 }
         }
-        console.log(pos)
+        //console.log(pos)
         return {
                 pos: pos,
                 idx: idx,

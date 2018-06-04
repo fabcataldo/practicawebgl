@@ -6,6 +6,7 @@ const spheregeometry = require('./spheregeometry')
 const MATERIAL = require('./material')
 var meshesoffigures = Object.create(Mesh)
 const DGL = require('./dgl')
+const src = require('raw-loader!./objs/cube-triangle.obj')
 
 meshesoffigures.getVertexInfoEjes = function (vertices) {
   var vertexArray = []
@@ -171,7 +172,7 @@ meshesoffigures.SetMeshesOfFigures = function (typeofmesh) {
   // dibujo el cubo, que está en el archivo dgl.js, con el parser que está en el mismo fichero
   if (typeofmesh === 7) {
     this.typeofmesh = typeofmesh
-    const src = 'raw-loader!../objs/cube-triangle.obj'
+
     var cuboobj = DGL.parseObj(src, false)
     var v = cuboobj.pos
     var ind = cuboobj.idx
@@ -181,7 +182,7 @@ meshesoffigures.SetMeshesOfFigures = function (typeofmesh) {
     this.meshResult.indexArrayObject = new Uint16Array(ind)
     this.meshResult.vertexArrayObject = new Float32Array(v)
     this.meshResult.normalsArrayObject = new Float32Array(n)
-    //console.log(v)
+    console.log(cuboobj)
     return this.meshResult
   }
 

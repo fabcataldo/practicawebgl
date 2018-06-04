@@ -217,6 +217,10 @@ module.exports = {
       {
         test: /\.(png|jpg|gif|svg)$/,
         use: ['file-loader']
+      },
+      {
+        test: /\.obj$/,
+        use: 'raw-loader'
       }
     ]
   }
