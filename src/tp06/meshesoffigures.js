@@ -168,10 +168,10 @@ meshesoffigures.SetMeshesOfFigures = function (typeofmesh) {
     return this.meshResult
   }
 
-  //dibujo el cubo, que está en el archivo dgl.js, con el parser que está en el mismo fichero
+  // dibujo el cubo, que está en el archivo dgl.js, con el parser que está en el mismo fichero
   if (typeofmesh === 7) {
     this.typeofmesh = typeofmesh
-    const src = 'raw-loader!../objs/cube.obj'
+    const src = 'raw-loader!../objs/cube-triangle.obj'
     var cuboobj = DGL.parseObj(src, false)
     var v = cuboobj.pos
     var ind = cuboobj.idx
