@@ -20,16 +20,12 @@ function WebGLRenderer (canvas) {
 
   // agrego un evento para sacar las coordenadas x e y del pixel que "clickeo"
   this.gl.canvas.addEventListener('click', function (event) {
-    if (event.offsetX === undefined) {
-      pickingCoordenadas = {x: event.layerX, y: canvasheight - event.layerY}
-    } else {
-      pickingCoordenadas = {x: event.offsetX, y: canvasheight - event.offsetY}
-    }
+    pickingCoordenadas = {x: event.offsetX, y: canvasheight - event.offsetY}
   })
 
   this.program = this.initiateProgram(vsSource, fsSource)
-  this.programpicking = this.initiateProgram(vsSource2, fsSource2)
   this.framebuffer = this.initiateFrameBufferPicking(canvas)
+  this.programpicking = this.initiateProgram(vsSource2, fsSource2)
 
   // -----------------------------------------------------------------------------------------------
 }
@@ -74,16 +70,17 @@ WebGLRenderer.prototype.initiateVariables = function () {
 WebGLRenderer.prototype.readPicking = function (scene) {
   // guardo un arreglo que va a tener el color en rgba del pixel
   var read = new Uint8Array(1 * 1 * 4)
-
+  this.gl.bindFramebuffer(this.gl.FRAMEBUFFER, this.framebuffer)
   // leo el pixel y obtengo el color
   this.gl.readPixels(pickingCoordenadas.x, pickingCoordenadas.y, 1, 1, this.gl.RGBA,
     this.gl.UNSIGNED_BYTE, read)
+  console.log(read)
   // desbindeo el framebuffer porque ya lo usé para leer el pixel
   this.gl.bindFramebuffer(this.gl.FRAMEBUFFER, null)
 
   // transformo el color del pixel leído, que me devuelve readPixels(), en valores de 0 a 1
   var colorPicked = [read[0] / 255, read[1] / 255, read[2] / 255]
-
+  console.log(colorPicked)
   for (var i = 5; i < scene.meshes.length; i++) {
     // si el color del pixel que hice click, tiene el mismo color que el del objeto que clickié
     if (this.compareArraysColor(scene.meshes[i].colorPicking, colorPicked)) {
@@ -149,7 +146,6 @@ WebGLRenderer.prototype.renderOffScreen = function (scene, camera, cameraEye) {
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, this.framebuffer)
     gl.drawElements(gl.TRIANGLES, scene.meshes[i].indexArrayObject.length, gl.UNSIGNED_SHORT, 0)
-
     gl.bindFramebuffer(gl.FRAMEBUFFER, null)
     contador++
   }
@@ -209,6 +205,7 @@ WebGLRenderer.prototype.initiateFrameBufferPicking = function (canvas) {
   // limpio lo que creé para evitar interferencias entre buffers
   this.gl.bindTexture(this.gl.TEXTURE_2D, null)
   this.gl.bindRenderbuffer(this.gl.RENDERBUFFER, null)
+  this.gl.bindFramebuffer(this.gl.FRAMEBUFFER, null)
 
   return framebuffer
 }
@@ -231,6 +228,7 @@ WebGLRenderer.prototype.render = function (scene, camera, cameraEye) {
 
 WebGLRenderer.prototype.renderOnScreen = function (scene, camera, cameraEye) {
   var gl = this.gl
+
   this.gl.linkProgram(this.program)
   this.gl.useProgram(this.program)
   this.initiateVariables()
