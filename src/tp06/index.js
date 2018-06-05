@@ -55,7 +55,7 @@ var state = {
 }
 
 var statecubotrasl = {
-  ejex: 0,
+  ejex: -8,
   ejey: 0,
   ejez: 0
 }
@@ -290,7 +290,7 @@ function tick () {
 
   teapotMesh.modelMatrix = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
 
-  teapotMesh.trasladar = [4,0,0]
+  teapotMesh.trasladar = coordenadasTransformsEsfera[0]
   teapotMesh.rotar = coordenadasTransformsEsfera[1]
   teapotMesh.escalar = coordenadasTransformsEsfera[2]
 
