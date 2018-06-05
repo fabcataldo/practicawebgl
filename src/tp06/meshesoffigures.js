@@ -4,7 +4,6 @@ const MATERIAL = require('./material')
 var meshesoffigures = Object.create(Mesh)
 const DGL = require('./dgl')
 const src = require('raw-loader!./objs/monkey.obj')
-const src3 = require('raw-loader!./objs/monkey.mtl')
 const src2 = require('raw-loader!./objs/teapot.obj')
 
 meshesoffigures.getVertexInfoEjes = function (vertices) {
