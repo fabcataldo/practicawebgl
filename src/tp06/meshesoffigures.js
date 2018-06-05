@@ -16,7 +16,6 @@ meshesoffigures.getVertexInfoEjes = function (vertices) {
     }
   }
   indexArray.push(0, 1)
-  // vertexArrayObject, indexArrayObject
   resultArray.push(new Float32Array(vertexArray), new Uint16Array(indexArray))
   return resultArray
 }
