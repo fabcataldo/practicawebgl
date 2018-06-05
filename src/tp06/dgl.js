@@ -101,13 +101,14 @@ DGL.triangleNormal = function(p0, p1, p2) {
 *
 */
 DGL.parseObj = function(src, smooth) {
-  console.log(src)
+  //console.log(src)
         smooth = smooth || false;
 
         var lines = src.split("\n");
         var vlines = lines.filter(
                 function(l) { return l[0] == "v"; }
         );
+        //console.log(vlines.length);
         var flines = lines.filter(
                 function(l) { return l[0] == "f"; }
         );
@@ -120,7 +121,9 @@ DGL.parseObj = function(src, smooth) {
                 verts[3 * i + 0] = parseFloat(posStr[1]);
                 verts[3 * i + 1] = parseFloat(posStr[2]);
                 verts[3 * i + 2] = parseFloat(posStr[3]);
+                //console.log(verts)
         }
+
 
         var pos = new Array(3 * 3 * flines.length);
         var idx = new Array(3 * flines.length);
@@ -217,5 +220,6 @@ DGL.parseObj = function(src, smooth) {
                 mode: "TRIANGLES"
         };
 };
+
 
 module.exports = DGL

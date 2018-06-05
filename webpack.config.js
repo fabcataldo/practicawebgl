@@ -219,7 +219,7 @@ module.exports = {
         use: ['file-loader']
       },
       {
-        test: /\.obj$/,
+        test: /\.txt$/,
         use: 'raw-loader'
       }
     ]

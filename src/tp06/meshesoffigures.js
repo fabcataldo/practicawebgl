@@ -1,12 +1,11 @@
 const Mesh = require('./mesh')
 const Geometry = require('./geometry')
-const cubegeometry = require('./cubegeometry')
-const cylindergeometry = require('./cylindergeometry')
-const spheregeometry = require('./spheregeometry')
 const MATERIAL = require('./material')
 var meshesoffigures = Object.create(Mesh)
 const DGL = require('./dgl')
-const src = require('raw-loader!./objs/cube-triangle.obj')
+const src = require('raw-loader!./objs/monkey.obj')
+const src3 = require('raw-loader!./objs/monkey.mtl')
+const src2 = require('raw-loader!./objs/teapot.obj')
 
 meshesoffigures.getVertexInfoEjes = function (vertices) {
   var vertexArray = []
@@ -119,70 +118,32 @@ meshesoffigures.SetMeshesOfGrilla = function () {
 meshesoffigures.SetMeshesOfFigures = function (typeofmesh) {
   this.typeofmesh = typeofmesh
 
-  if (this.typeofmesh === 1) { // es el cubo
-    var cubegeometria = new cubegeometry.CubeGeometry(6)
-    var verticesCubo = cubegeometria.verticesCubo
-    var indexVerticesCubo = [
-      0,  1,  2,  0,  2,  3, // enfrente
-      4,  5,  6,      4,  6,  7,    // atrás
-      8,  9,  10,     8,  10, 11,   // arriba
-      12, 13, 14,     12, 14, 15,   // fondo
-      16, 17, 18,     16, 18, 19,   // derecha
-      20, 21, 22,     20, 22, 23    // izquierda
-    ]
-    var normalsCubo = cubegeometria.normals
-    var material = [0, 0.5, 0.5, 1]
-    var cubeGeometry = new Geometry.Geometry(verticesCubo, 6, normalsCubo)
-    this.meshResult = new Mesh.Mesh(cubeGeometry, new MATERIAL(material, null))
-    this.meshResult.indexArrayObject = new Uint16Array(indexVerticesCubo)
-    this.meshResult.vertexArrayObject = new Float32Array(verticesCubo)
-    this.meshResult.normalsArrayObject = new Float32Array(normalsCubo)
-    return this.meshResult
-  }
-
-  if (typeofmesh === 5) {
+  if (typeofmesh === 1) {
     this.typeofmesh = typeofmesh
-    var esferageometria = new spheregeometry.SphereGeometry(1)
-    var vertexPositionData = esferageometria.vertexPositionData
-    var indexData = esferageometria.indexData
-    var normalsEsfera = esferageometria.normals
-    var esferaGeometry = new Geometry.Geometry(vertexPositionData, 23, normalsEsfera)
-    this.meshResult = new Mesh.Mesh(esferaGeometry, new MATERIAL([1, 0.5, 0, 1], null))
-    this.meshResult.indexArrayObject = new Uint16Array(indexData)
-    this.meshResult.vertexArrayObject = new Float32Array(vertexPositionData)
-    this.meshResult.normalsArrayObject = new Float32Array(normalsEsfera)
-    return this.meshResult
-  }
-
-  if (typeofmesh === 6) {
-    this.typeofmesh = typeofmesh
-    var cilindrogeometria = new cylindergeometry.CylinderGeometry(23)
-    var vertices = cilindrogeometria.vertices
-    var indices = cilindrogeometria.indices
-    var normals = cilindrogeometria.normals
-    var cilindroGeometry = new Geometry.Geometry(vertices, 23, normals)
-    this.meshResult = new Mesh.Mesh(cilindroGeometry, new MATERIAL([0, 1, 1, 1], null))
-    this.meshResult.indexArrayObject = new Uint16Array(indices)
-    this.meshResult.vertexArrayObject = new Float32Array(vertices)
-    this.meshResult.normalsArrayObject = new Float32Array(normals)
-
-    return this.meshResult
-  }
-
-  // dibujo el cubo, que está en el archivo dgl.js, con el parser que está en el mismo fichero
-  if (typeofmesh === 7) {
-    this.typeofmesh = typeofmesh
-
-    var cuboobj = DGL.parseObj(src, false)
-    var v = cuboobj.pos
-    var ind = cuboobj.idx
-    var n = cuboobj.normals
-    var cubogeometry = new Geometry.Geometry(v, 6, n)
-    this.meshResult = new Mesh.Mesh(cubogeometry, new MATERIAL([0, 0.5, 0.5, 1], null))
+    var cobj = DGL.parseObj(src, true)
+    var v = cobj.pos
+    var ind = cobj.idx
+    var n = cobj.normals
+    var cgeometry = new Geometry.Geometry(v, 0, n)
+    this.meshResult = new Mesh.Mesh(cgeometry, new MATERIAL([0, 0.5, 0.5, 1], null))
     this.meshResult.indexArrayObject = new Uint16Array(ind)
     this.meshResult.vertexArrayObject = new Float32Array(v)
     this.meshResult.normalsArrayObject = new Float32Array(n)
-    console.log(cuboobj)
+
+    return this.meshResult
+  }
+
+  if (typeofmesh === 2) {
+    this.typeofmesh = typeofmesh
+    var tobj = DGL.parseObj(src2, true)
+    var tv = tobj.pos
+    var tind = tobj.idx
+    var tn = tobj.normals
+    var tgeometry = new Geometry.Geometry(tv, 0, tn)
+    this.meshResult = new Mesh.Mesh(tgeometry, new MATERIAL([0, 0.5, 0.5, 1], null))
+    this.meshResult.indexArrayObject = new Uint16Array(tind)
+    this.meshResult.vertexArrayObject = new Float32Array(tv)
+    this.meshResult.normalsArrayObject = new Float32Array(tn)
     return this.meshResult
   }
 

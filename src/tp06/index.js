@@ -25,19 +25,12 @@ for (i = 0; i < ejesMesh.length; i++) {
   ejesMesh[i].modelMatrix = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
 }
 
-/*
-var cuboMesh = new MESHESOFFIGURES.SetMeshesOfFigures(1)
-scene.addMesh(cuboMesh)
-*/
-var cuboobjwvf = new MESHESOFFIGURES.SetMeshesOfFigures(7)
-scene.addMesh(cuboobjwvf)
-/*
-var esferaMesh = new MESHESOFFIGURES.SetMeshesOfFigures(5)
-scene.addMesh(esferaMesh)
+var monkeyMesh = new MESHESOFFIGURES.SetMeshesOfFigures(1)
+scene.addMesh(monkeyMesh)
 
-var cilindroMesh = new MESHESOFFIGURES.SetMeshesOfFigures(6)
-scene.addMesh(cilindroMesh)
-*/
+var teapotMesh = new MESHESOFFIGURES.SetMeshesOfFigures(2)
+scene.addMesh(teapotMesh)
+
 var canvas = document.getElementById('c')
 
 var state = {
@@ -88,7 +81,6 @@ var statecubom = {
   csa: 1.0
 }
 
-/*
 var stateesferatrasl = {
   esferaejex: 0,
   esferaejey: 0,
@@ -119,36 +111,7 @@ var stateesferam = {
   esa: 1.0
 }
 
-var statecilindrotrasl = {
-  cilindroejex: 0,
-  cilindroejey: 0,
-  cilindroejez: 0
-}
 
-var statecilindrorot = {
-  cilindrorotejex: 0,
-  cilindrorotejey: 0,
-  cilindrorotejez: 0
-}
-
-var statecilindroesc = {
-  cilindroescejex: 1,
-  cilindroescejey: 1,
-  cilindroescejez: 1
-}
-
-var statecilindrom = {
-  cdr: 0.4,
-  cdg: 0.5,
-  cdb: 0.4,
-  cda: 1.0,
-
-  csr: 0.04,
-  csg: 0.7,
-  csb: 0.04,
-  csa: 1.0
-}
-*/
 var gui = new DATGUI.GUI({width: 500})
 var foldergui = gui.addFolder('Perspective Camera')
 foldergui.add(state, 'fovy', Math.PI / 4, Math.PI, Math.PI / 18)
@@ -175,79 +138,53 @@ foldergui3.add(state, 'upX', 0, 5, 1)
 foldergui3.add(state, 'upY', 1, 5, 1)
 foldergui3.add(state, 'upZ', 0, 5, 1)
 
-var foldergui7 = gui.addFolder('Transformar cubo!!')
-var subfoldergui7 = foldergui7.addFolder('Trasladar cubo!!')
+var foldergui7 = gui.addFolder('Transformar MONKEY!!')
+var subfoldergui7 = foldergui7.addFolder('Trasladar!!')
 subfoldergui7.add(statecubotrasl, 'ejex', -10, 10, 0.01)
 subfoldergui7.add(statecubotrasl, 'ejey', -10, 10, 0.01)
 subfoldergui7.add(statecubotrasl, 'ejez', -10, 10, 0.01)
-var subfoldergui8 = foldergui7.addFolder('Rotar cubo!!')
+var subfoldergui8 = foldergui7.addFolder('Rotar!!')
 subfoldergui8.add(statecuborot, 'rotejex', -10, 10, 0.01)
 subfoldergui8.add(statecuborot, 'rotejey', -10, 10, 0.01)
 subfoldergui8.add(statecuborot, 'rotejez', -10, 10, 0.01)
-var subfoldergui9 = foldergui7.addFolder('Escalar cubo!!')
+var subfoldergui9 = foldergui7.addFolder('Escalar!!')
 subfoldergui9.add(statecuboesc, 'escejex', 0, 10, 0.01)
 subfoldergui9.add(statecuboesc, 'escejey', 0, 10, 0.01)
 subfoldergui9.add(statecuboesc, 'escejez', 0, 10, 0.01)
-var subfoldergui22 = foldergui7.addFolder('Colorear material del cubo (difuso)!!')
+var subfoldergui22 = foldergui7.addFolder('Colorear material (difuso)!!')
 subfoldergui22.add(statecubom, 'cdr', 0, 1, 0.01)
 subfoldergui22.add(statecubom, 'cdg', 0, 1, 0.01)
 subfoldergui22.add(statecubom, 'cdb', 0, 1, 0.01)
 subfoldergui22.add(statecubom, 'cda', 0, 1, 0.01)
-var subfoldergui28 = foldergui7.addFolder('Colorear material del cubo (specular)!!')
+var subfoldergui28 = foldergui7.addFolder('Colorear material (specular)!!')
 subfoldergui28.add(statecubom, 'csr', 0, 1, 0.01)
 subfoldergui28.add(statecubom, 'csg', 0, 1, 0.01)
 subfoldergui28.add(statecubom, 'csb', 0, 1, 0.01)
 subfoldergui28.add(statecubom, 'csa', 0, 1, 0.01)
 
-/*
-var foldergui10 = gui.addFolder('Transformar esfera!!')
-var subfoldergui10 = foldergui10.addFolder('Trasladar esfera!!')
+var foldergui10 = gui.addFolder('Transformar TEAPOT!!')
+var subfoldergui10 = foldergui10.addFolder('Trasladar!!')
 subfoldergui10.add(stateesferatrasl, 'esferaejex', -10, 10, 0.01)
 subfoldergui10.add(stateesferatrasl, 'esferaejey', -10, 10, 0.01)
 subfoldergui10.add(stateesferatrasl, 'esferaejez', -10, 10, 0.01)
-var subfoldergui11 = foldergui10.addFolder('Rotar esfera!!')
+var subfoldergui11 = foldergui10.addFolder('Rotar!!')
 subfoldergui11.add(stateesferarot, 'esferarotejex', -10, 10, 0.01)
 subfoldergui11.add(stateesferarot, 'esferarotejey', -10, 10, 0.01)
 subfoldergui11.add(stateesferarot, 'esferarotejez', -10, 10, 0.01)
-var subfoldergui12 = foldergui10.addFolder('Escalar esfera!!')
+var subfoldergui12 = foldergui10.addFolder('Escalar!!')
 subfoldergui12.add(stateesferaesc, 'esferaescejex', 0, 10, 0.01)
 subfoldergui12.add(stateesferaesc, 'esferaescejey', 0, 10, 0.01)
 subfoldergui12.add(stateesferaesc, 'esferaescejez', 0, 10, 0.01)
-var subfoldergui23 = foldergui10.addFolder('Colorear material de la esfera (difusa)!!')
+var subfoldergui23 = foldergui10.addFolder('Colorear material(difusa)!!')
 subfoldergui23.add(stateesferam, 'edr', 0, 1, 0.01)
 subfoldergui23.add(stateesferam, 'edg', 0, 1, 0.01)
 subfoldergui23.add(stateesferam, 'edb', 0, 1, 0.01)
 subfoldergui23.add(stateesferam, 'eda', 0, 1, 0.01)
-var subfoldergui29 = foldergui10.addFolder('Colorear material de la esfera (specular)!!')
+var subfoldergui29 = foldergui10.addFolder('Colorear material(specular)!!')
 subfoldergui29.add(stateesferam, 'esr', 0, 1, 0.01)
 subfoldergui29.add(stateesferam, 'esg', 0, 1, 0.01)
 subfoldergui29.add(stateesferam, 'esb', 0, 1, 0.01)
 subfoldergui29.add(stateesferam, 'esa', 0, 1, 0.01)
-
-var foldergui13 = gui.addFolder('Transformar Cilindro!!')
-var subfoldergui13 = foldergui13.addFolder('Trasladar Cilindro!!')
-subfoldergui13.add(statecilindrotrasl, 'cilindroejex', -10, 10, 0.01)
-subfoldergui13.add(statecilindrotrasl, 'cilindroejey', -10, 10, 0.01)
-subfoldergui13.add(statecilindrotrasl, 'cilindroejez', -10, 10, 0.01)
-var subfoldergui14 = foldergui13.addFolder('Rotar Cilindro!!')
-subfoldergui14.add(statecilindrorot, 'cilindrorotejex', -10, 10, 0.01)
-subfoldergui14.add(statecilindrorot, 'cilindrorotejey', -10, 10, 0.01)
-subfoldergui14.add(statecilindrorot, 'cilindrorotejez', -10, 10, 0.01)
-var subfoldergui15 = foldergui13.addFolder('Escalar Cilindro!!')
-subfoldergui15.add(statecilindroesc, 'cilindroescejex', 0, 10, 0.01)
-subfoldergui15.add(statecilindroesc, 'cilindroescejey', 0, 10, 0.01)
-subfoldergui15.add(statecilindroesc, 'cilindroescejez', 0, 10, 0.01)
-var subfoldergui27 = foldergui13.addFolder('Colorear material del cilindro (difuso)!!')
-subfoldergui27.add(statecilindrom, 'cdr', 0, 1, 0.01)
-subfoldergui27.add(statecilindrom, 'cdg', 0, 1, 0.01)
-subfoldergui27.add(statecilindrom, 'cdb', 0, 1, 0.01)
-subfoldergui27.add(statecilindrom, 'cda', 0, 1, 0.01)
-var subfoldergui30 = foldergui13.addFolder('Colorear material del cilindro (specular)!!')
-subfoldergui30.add(statecilindrom, 'csr', 0, 1, 0.01)
-subfoldergui30.add(statecilindrom, 'csg', 0, 1, 0.01)
-subfoldergui30.add(statecilindrom, 'csb', 0, 1, 0.01)
-subfoldergui30.add(statecilindrom, 'csa', 0, 1, 0.01)
-*/
 
 scene.ambientlight = new AMBIENTLIGHT([0, 0, 0], [1, 1, 1])
 scene.ambientlight.habilitarLuz = true
@@ -304,10 +241,7 @@ subfoldergui31.add(scene.directionallight, 'habilitarLuz')
 
 var webglrenderer = new WEBGLRENDERER(canvas)
 var coordenadasTransformsCubo = []
-/*
 var coordenadasTransformsEsfera = []
-var coordenadasTransformsCilindro = []
-*/
 
 var cameraeye = []
 function tick () {
@@ -327,49 +261,46 @@ function tick () {
     [statecuboesc.escejex, statecuboesc.escejey, statecuboesc.escejez]
   ]
 
-  /*
   coordenadasTransformsEsfera = [[stateesferatrasl.esferaejex, stateesferatrasl.esferaejey,
     stateesferatrasl.esferaejez], [stateesferarot.esferarotejex, stateesferarot.esferarotejey,
     stateesferarot.esferarotejez], [stateesferaesc.esferaescejex, stateesferaesc.esferaescejey,
     stateesferaesc.esferaescejez]]
 
-  coordenadasTransformsCilindro = [[statecilindrotrasl.cilindroejex, statecilindrotrasl.cilindroejey,
-    statecilindrotrasl.cilindroejez], [statecilindrorot.cilindrorotejex, statecilindrorot.cilindrorotejey,
-    statecilindrorot.cilindrorotejez], [statecilindroesc.cilindroescejex, statecilindroesc.cilindroescejey,
-    statecilindroesc.cilindroescejez]]
-  */
   cameraeye = [[state.eyeX, state.eyeY, state.eyeZ], [state.centerX, state.centerY, state.centerZ],
     [state.upX, state.upY, state.upZ]]
 
   var perspectivecamera = new PERSPECTIVECAMERA(state.fovy, state.aspect, state.near, state.far)
   // var orthocamera = new ORTHOGRAPHICCAMERA(state.left, state.right, state.bottom, state.top, state.near, state.far)
 
-  /*
-  cuboMesh.modelMatrix = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
+  monkeyMesh.modelMatrix = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
 
-  cuboMesh.trasladar = coordenadasTransformsCubo[0]
-  cuboMesh.rotar = coordenadasTransformsCubo[1]
-  cuboMesh.escalar = coordenadasTransformsCubo[2]
+  monkeyMesh.trasladar = coordenadasTransformsCubo[0]
+  monkeyMesh.rotar = coordenadasTransformsCubo[1]
+  monkeyMesh.escalar = coordenadasTransformsCubo[2]
 
-  cuboMesh.trasladarMesh()
-  cuboMesh.rotarMesh()
-  cuboMesh.escalarMesh()
+  monkeyMesh.trasladarMesh()
+  monkeyMesh.rotarMesh()
+  monkeyMesh.escalarMesh()
 
   // material turquesa, como el color del cubo, con brillo de 0.25*128
   scene.meshes[5].material.setColorAmbient([0.1, 0.18725, 0.1745, 1.0])
   scene.meshes[5].material.setColorDiffuse([statecubom.cdr, statecubom.cdg, statecubom.cdb, statecubom.cda])
   scene.meshes[5].material.setColorSpecular([statecubom.csr, statecubom.csg, statecubom.csb, statecubom.csa])
   scene.meshes[5].material.setShininess(0.1)
-*/
-  /*
-  esferaMesh.modelMatrix = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
-  esferaMesh.trasladar = coordenadasTransformsEsfera[0]
-  esferaMesh.rotar = coordenadasTransformsEsfera[1]
-  esferaMesh.escalar = coordenadasTransformsEsfera[2]
 
-  esferaMesh.trasladarMesh()
-  esferaMesh.rotarMesh()
-  esferaMesh.escalarMesh()
+  teapotMesh.modelMatrix = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
+
+  teapotMesh.trasladar = [4,0,0]
+  teapotMesh.rotar = coordenadasTransformsEsfera[1]
+  teapotMesh.escalar = coordenadasTransformsEsfera[2]
+
+  teapotMesh.trasladar = coordenadasTransformsEsfera[0]
+  teapotMesh.rotar = coordenadasTransformsEsfera[1]
+  teapotMesh.escalar = coordenadasTransformsEsfera[2]
+
+  teapotMesh.trasladarMesh()
+  teapotMesh.rotarMesh()
+  teapotMesh.escalarMesh()
 
   // material rojo plástico, con brillo de 0.25*128
   scene.meshes[6].material.setColor([stateesferam.er, stateesferam.eg, stateesferam.eb, stateesferam.ea])
@@ -378,22 +309,6 @@ function tick () {
   scene.meshes[6].material.setColorSpecular([stateesferam.esr, stateesferam.esg, stateesferam.esb, stateesferam.esa])
   scene.meshes[6].material.setShininess(0.25)
 
-  cilindroMesh.trasladar = coordenadasTransformsCilindro[0]
-  cilindroMesh.rotar = coordenadasTransformsCilindro[1]
-  cilindroMesh.escalar = coordenadasTransformsCilindro[2]
-
-  cilindroMesh.trasladarMesh()
-  cilindroMesh.rotarMesh()
-  cilindroMesh.escalarMesh()
-
-  // material green rubber, con brillo de 0.078125*128
-  scene.meshes[7].material.setColor([statecilindrom.cr, statecilindrom.cg, statecilindrom.cb, statecilindrom.ca])
-  scene.meshes[7].material.setColorAmbient([0.0, 0.05, 0.0, 1.0])
-  scene.meshes[7].material.setColorDiffuse([statecilindrom.cdr, statecilindrom.cdg, statecilindrom.cdb, statecilindrom.cda])
-  scene.meshes[7].material.setColorSpecular([statecilindrom.csr, statecilindrom.csg, statecilindrom.csb, statecilindrom.csa])
-  scene.meshes[7].material.setShininess(0.078125)
-  */
-  scene.meshes[5].modelMatrix = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
   webglrenderer.render(scene, perspectivecamera, cameraeye)
 
   window.requestAnimationFrame(tick)
