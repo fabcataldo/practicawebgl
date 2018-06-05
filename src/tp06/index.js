@@ -111,7 +111,6 @@ var stateesferam = {
   esa: 1.0
 }
 
-
 var gui = new DATGUI.GUI({width: 500})
 var foldergui = gui.addFolder('Perspective Camera')
 foldergui.add(state, 'fovy', Math.PI / 4, Math.PI, Math.PI / 18)
